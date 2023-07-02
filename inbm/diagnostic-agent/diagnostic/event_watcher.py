@@ -9,6 +9,8 @@ import logging
 
 from threading import Thread, Lock
 
+from .ibroker import IBroker
+
 from .constants import EVENTS_CHANNEL
 from .constants import REMEDIATION_CONTAINER_CHANNEL
 from .constants import REMEDIATION_IMAGE_CHANNEL
@@ -27,7 +29,7 @@ current_dbs_mode = DEFAULT_DBS_MODE
 class EventWatcher(Thread):
     """Starts up a thread to watch for events coming from Docker"""
 
-    def __init__(self, broker):
+    def __init__(self, broker: IBroker) -> None:
         self.lock = Lock()
         Thread.__init__(self, name="dockerEventWatcher")
         self._broker = broker
@@ -130,6 +132,6 @@ class EventWatcher(Thread):
             events = next_line.split('\t')
             self._process_output(events, next_line)
 
-    def stop(self):
+    def stop(self) -> None:
         """Stop event watcher"""
         self._running = False

@@ -70,15 +70,18 @@ class Broker:  # pragma: no cover
                          'request is in the correct format. {}'
                          .format(error))
 
-    def _execute(self, request):
+    def _execute(self, request: dict) -> None:
         """Execute MQTT command received on command channel
 
+        This function processes and executes MQTT commands received on the command channel.
+        It takes a dictionary representing the incoming JSON request as an argument.
+        The function does not return anything directly. However, it creates a response as
+        a dictionary representing the output of the processed command and publishes it to
+        the MQTT Response channel. This includes a return code (`'rc': <0/1>`),
+        a user-friendly message (`'message': <message>`), and the invoked command
+        (`'cmd': <command invoked>`).
+
         @param request: Incoming JSON request
-        @return: JSON object representing output of command
-            { 'rc': <0/1 - return code>,
-            'message': <user friendly message>,
-            'cmd': <command invoked>
-            }
         """
         request_id = request['id']
         resp = RESP_OK
@@ -230,7 +233,7 @@ class Broker:  # pragma: no cover
             return self.key_value_store.get_element(headers, value_string)
         raise ConfigurationException("Invalid request: no path or header")
 
-    def _publish_agent_values(self, agent) -> None:
+    def _publish_agent_values(self, agent: str) -> None:
         children = self.key_value_store.get_children(agent)
         for child in children:
             value = children[child]
