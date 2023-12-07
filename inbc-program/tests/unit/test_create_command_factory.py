@@ -6,6 +6,7 @@ from inbc.command.command import RestartCommand, QueryCommand
 from inbc.command.ota_command import FotaCommand, SotaCommand, PotaCommand, AotaCommand
 from inbc.command.config_command import LoadConfigCommand, SetConfigCommand, GetConfigCommand, \
     AppendConfigCommand, RemoveConfigCommand
+from inbc.command.source_command import SourceCommand
 
 
 class TestOsFactory(TestCase):
@@ -42,6 +43,9 @@ class TestOsFactory(TestCase):
 
     def test_create_append_command(self) -> None:
         assert type(create_command_factory("append", Mock())) is AppendConfigCommand
+
+    def test_create_source_command(self) -> None:
+        assert type(create_command_factory("source", Mock())) is SourceCommand
 
     def test_raise_on_invalid_command(self) -> None:
         with self.assertRaises(InbcException):

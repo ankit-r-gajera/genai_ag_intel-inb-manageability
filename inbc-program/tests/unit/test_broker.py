@@ -26,6 +26,33 @@ class TestBroker(TestCase):
         self._load_args = self.arg_parser.parse_args(
             ['load', '-u', 'https://abc.com/intel_configuration.xml'])
         self._restart_args = self.arg_parser.parse_args(['restart'])
+        self._source_app_add_args = self.arg_parser.parse_args(
+            ['source', 'application', 'add', '-gpgKeyPath', 'https://repositories.intel.com/gpu/intel-graphics.key',
+             '-gpgKeyName', 'intel-graphics.gpg',
+             '-source', 'echo "deb https://repositories.intel.com/gpu/ubuntu jammy/production/2328 unified"',
+             '-fileName', 'intel-gpu-jammy.list'])
+        self._source_app_remove_args = self.arg_parser.parse_args(
+            ['source', 'application', 'remove',
+             '-gpgKeyId', '46C1680FC119E61A501811823A319F932D945953',
+             '-fileName', 'intel-gpu-jammy.list'])
+        self._source_app_update_args = self.arg_parser.parse_args(
+            ['source', 'application', 'update',
+             '-source', 'echo "deb https://repositories.intel.com/gpu/ubuntu jammy/production/2328 unified"',
+             '-fileName', 'intel-gpu-jammy.list'])
+        self._source_app_list_args = self.arg_parser.parse_args(['source', 'application', 'list'])
+        self._source_os_add_args = self.arg_parser.parse_args(
+            ['source', 'os', 'add',
+             '-sources', 'deb http://example.com/ focal main restricted universe',
+             'deb-src http://example.com/ focal-security main'])
+        self._source_os_remove_args = self.arg_parser.parse_args(
+            ['source', 'os', 'remove',
+             '-sources', 'deb http://example.com/ focal main restricted universe',
+             'deb-src http://example.com/ focal-security main'])
+        self._source_os_update_args = self.arg_parser.parse_args(
+            ['source', 'os', 'update',
+             '-sources', 'deb http://example.com/ focal main restricted universe',
+             'deb-src http://example.com/ focal-security main'])
+        self._source_os_list_args = self.arg_parser.parse_args(['source', 'os', 'list'])
 
     @patch('inbc.broker.MQTT')
     @patch('inbc.command.ota_command.SotaCommand.trigger_manifest')
