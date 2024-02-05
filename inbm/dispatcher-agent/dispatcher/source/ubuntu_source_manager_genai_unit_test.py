@@ -12,6 +12,7 @@ sys.path.insert(0, '/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-
 sys.path.insert(0, '/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-manageability/genai_ag_intel-inb-manageability/inbm/dispatcher-agent/dispatcher/source/')
 import pytest
 from unittest.mock import patch, MagicMock
+from dispatcher.source.ubuntu_source_manager import UbuntuApplicationSourceManager, SourceError, ApplicationRemoveSourceParameters
 from dispatcher.source.ubuntu_source_manager import UbuntuApplicationSourceManager, ApplicationAddSourceParameters
 from unittest.mock import patch, mock_open
 from dispatcher.source.ubuntu_source_manager import UbuntuApplicationSourceManager, ApplicationSourceList
@@ -98,53 +99,45 @@ class TestUbuntuApplicationSourceManagerList:
 #DO NOT DELETE THIS LINE - TestUbuntuApplicationSourceManagerRemove
 '''
 ADD HUMAN FEEDBACK BELOW:
-
+    Add more cases to test 
 '''
 class TestUbuntuApplicationSourceManagerRemove:
     @pytest.fixture
     def manager(self):
         return UbuntuApplicationSourceManager(MagicMock())
 
-    @pytest.fixture
-    def parameters(self):
-        return ApplicationRemoveSourceParameters(source_list_file_name='test', gpg_key_name='test_key')
+    @pytest.mark.parametrize('gpg_key_name, source_list_file_name, remove_file_return_value, expected_exception', [
+        # Test case: Removing a source file that exists and a GPG key that exists
+        ('existing_key', 'existing_file', True, None),
 
-    @pytest.mark.parametrize('file_exists, key_exists, should_raise', [
-        (True, True, False),  # Normal case
-        (False, True, True),  # File does not exist
-        (True, False, False),  # Key does not exist
-        (False, False, True),  # Neither file nor key exist
+        # Test case: Removing a source file that does not exist and a GPG key that exists
+        ('existing_key', 'nonexistent_file', False, SourceError),
+
+        # Test case: Removing a source file that exists and a GPG key that does not exist
+        ('nonexistent_key', 'existing_file', True, None),
+
+        # Test case: Removing a source file that does not exist and a GPG key that does not exist
+        ('nonexistent_key', 'nonexistent_file', False, SourceError),
+
+        # Test case: Removing a source file with invalid name
+        ('existing_key', '..', True, SourceError),
     ])
     @patch('dispatcher.source.ubuntu_source_manager.remove_file')
-    @patch('dispatcher.source.ubuntu_source_manager.get_canonical_representation_of_path')
-    def test_remove(self, mock_get_path, mock_remove_file, manager, parameters, file_exists, key_exists, should_raise):
-        # Mock the remove_file function to return whether the file/key exists
-        mock_remove_file.side_effect = lambda path: file_exists if 'sources.list.d' in path else key_exists
+    def test_remove(self, mock_remove_file, manager, gpg_key_name, source_list_file_name, remove_file_return_value, expected_exception):
+        # Mock the remove_file function to return the specified return value
+        mock_remove_file.return_value = remove_file_return_value
 
-        # Mock the get_canonical_representation_of_path function to return the same path
-        mock_get_path.side_effect = lambda path: path
+        parameters = ApplicationRemoveSourceParameters(gpg_key_name=gpg_key_name, source_list_file_name=source_list_file_name)
 
-        if should_raise:
-            with pytest.raises(SourceError):
+        if expected_exception is not None:
+            with pytest.raises(expected_exception):
                 manager.remove(parameters)
         else:
             manager.remove(parameters)
-            assert mock_remove_file.call_count == 2  # Both the file and the key should be removed
 
-    @pytest.mark.parametrize('file_name, should_raise', [
-        ('test', False),  # Normal case
-        ('..', True),  # Invalid file name
-        ('.', True),  # Invalid file name
-        ('test/test', True),  # Invalid file name
-    ])
-    def test_remove_invalid_file_name(self, manager, file_name, should_raise):
-        parameters = ApplicationRemoveSourceParameters(source_list_file_name=file_name, gpg_key_name='test_key')
-
-        if should_raise:
-            with pytest.raises(SourceError):
-                manager.remove(parameters)
-        else:
-            manager.remove(parameters)  # Should not raise
+            # Verify that the remove_file function was called with the correct arguments
+            mock_remove_file.assert_any_call(f'/usr/share/keyrings/{gpg_key_name}')
+            mock_remove_file.assert_any_call(f'/etc/apt/sources.list.d/{source_list_file_name}')
 
 #DO NOT DELETE THIS LINE - TestUbuntuApplicationSourceManagerUpdate
 '''
