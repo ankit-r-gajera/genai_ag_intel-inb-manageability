@@ -39,7 +39,7 @@ jobs:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       TASK_TYPE: generate
       INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/sota/snapshot.py
-      TESTS_OUTPUT_PATH: inbm/genai_unit_tests
+      # TESTS_OUTPUT_PATH: inbm/genai_unit_tests
       # EXCLUDE_PATHS: <Exclude your paths here if want to exclude specific files/dirs>
 
   UNIT-TEST-RUN:
@@ -57,5 +57,5 @@ jobs:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       TASK_TYPE: run
       INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/sota/snapshot.py
-      TESTS_OUTPUT_PATH: inbm/genai_unit_tests
+      # TESTS_OUTPUT_PATH: inbm/genai_unit_tests
       # EXCLUDE_PATHS: <Exclude your paths here if want to exclude specific files/dirs>
