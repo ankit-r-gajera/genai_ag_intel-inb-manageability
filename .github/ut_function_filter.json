@@ -1,21 +1,14 @@
 {
-    "inbm/dispatcher-agent/dispatcher/source/ubuntu_source_manager.py": {
+    "inbm/dispatcher-agent/dispatcher/dispatcher_class.py": {
         "class": [
             {
-                "name": "UbuntuOsSourceManager",
+                "name": "Dispatcher",
                 "include_specific_functions": [
-                    "add"
+                    "_perform_startup_tasks"
                 ],
                 "exclude_specific_functions": [],
                 "include_all_functions": false,
                 "exclude_all_functions": false
-            },
-            {
-                "name": "UbuntuApplicationSourceManager",
-                "include_specific_functions": [],
-                "exclude_specific_functions": [],
-                "include_all_functions": false,
-                "exclude_all_functions": true
             }
         ]
     }
