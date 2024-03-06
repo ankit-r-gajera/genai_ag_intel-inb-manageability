@@ -1,21 +1,14 @@
 {
-    "inbm/dispatcher-agent/dispatcher/dispatcher_class.py": {
+    "inbm/dispatcher-agent/dispatcher/sota/snapshot.py": {
         "class": [
             {
-                "name": "Dispatcher",
+                "name": "DebainBasedSnapshot",
                 "include_specific_functions": [
-                    "_perform_startup_tasks"
+                    "take_snapshot"
                 ],
                 "exclude_specific_functions": [],
                 "include_all_functions": false,
                 "exclude_all_functions": false
-            },
-            {
-                "name": "",
-                "include_specific_functions": [],
-                "exclude_specific_functions": [],
-                "include_all_functions": false,
-                "exclude_all_functions": true
             }
         ]
     }
