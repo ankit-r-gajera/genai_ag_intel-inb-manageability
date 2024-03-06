@@ -9,6 +9,13 @@
                 "exclude_specific_functions": [],
                 "include_all_functions": false,
                 "exclude_all_functions": false
+            },
+            {
+                "name": "",
+                "include_specific_functions": [],
+                "exclude_specific_functions": [],
+                "include_all_functions": false,
+                "exclude_all_functions": true
             }
         ]
     }
