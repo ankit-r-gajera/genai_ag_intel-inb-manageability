@@ -1,8 +1,8 @@
 import sys
 sys.path.append('/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-manageability/genai_ag_intel-inb-manageability/inbm/')
 sys.path.append('/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-manageability/genai_ag_intel-inb-manageability/inbm/dispatcher-agent/')
-sys.path.append('/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-manageability/genai_ag_intel-inb-manageability/inbm/dispatcher-agent/dispatcher/')
 sys.path.append('/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-manageability/genai_ag_intel-inb-manageability/inbm-lib/')
+sys.path.append('/home/runner/GITHUB_ACTION_RUNNERS/_work/genai_ag_intel-inb-manageability/genai_ag_intel-inb-manageability/inbm/dispatcher-agent/dispatcher/')
 import pytest
 from unittest.mock import MagicMock, patch, mock_open
 from dispatcher.downloader import _check_if_valid_file
