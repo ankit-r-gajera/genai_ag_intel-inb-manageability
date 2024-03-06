@@ -40,4 +40,5 @@ jobs:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       TASK_TYPE: run
       INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/dispatcher_class.py
+      TESTS_OUTPUT_PATH: inbm/genai_unit_tests
       # EXCLUDE_PATHS: <Exclude your paths here if want to exclude specific files/dirs>
