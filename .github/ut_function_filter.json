@@ -1,25 +1,21 @@
 {
-    "inbm/dispatcher-agent/dispatcher/dispatcher_class.py": {
+    "inbm/dispatcher-agent/dispatcher/source/ubuntu_source_manager.py": {
         "class": [
             {
-                "name": "",
-                "include_specific_functions": [],
-                "exclude_specific_functions": [],
-                "include_all_functions": false,
-                "exclude_all_functions": true
-            }
-        ]
-    },
-    "inbm/dispatcher-agent/dispatcher/dispatcher_class.py": {
-        "class": [
-            {
-                "name": "Dispatcher",
+                "name": "UbuntuOsSourceManager",
                 "include_specific_functions": [
-                    "check_username_password"
+                    "add"
                 ],
                 "exclude_specific_functions": [],
                 "include_all_functions": false,
                 "exclude_all_functions": false
+            },
+            {
+                "name": "UbuntuApplicationSourceManager",
+                "include_specific_functions": [],
+                "exclude_specific_functions": [],
+                "include_all_functions": false,
+                "exclude_all_functions": true
             }
         ]
     }
