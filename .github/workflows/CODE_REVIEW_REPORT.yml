@@ -9,8 +9,8 @@ jobs:
         github.event_name == 'pull_request' && github.event.pull_request.user.login != 'nex-maximus'
     runs-on: [self-hosted, genai_copilot-code-review]
     steps:
-      - name: PR Agent action step
-        id: pragent
+      - name: PR Agent report action step
+        id: report
         run: |
          cd  ../../../genai_pr_agent
          chmod +x ./get_pr_eval_report.sh
