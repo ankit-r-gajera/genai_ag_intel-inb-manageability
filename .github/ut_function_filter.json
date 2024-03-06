@@ -1,0 +1,15 @@
+{
+    "inbm/dispatcher-agent/dispatcher/dispatcher_class.py": {
+        "class": [
+            {
+                "name": "Dispatcher",
+                "include_specific_functions": [
+                    "check_username_password"
+                ],
+                "exclude_specific_functions": [],
+                "include_all_functions": false,
+                "exclude_all_functions": false
+            }
+        ]
+    }
+}
