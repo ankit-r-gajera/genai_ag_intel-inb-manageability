@@ -22,6 +22,8 @@ jobs:
         run: |
          cd  ../../../genai_pr_agent
          chmod +x ./get_pr_agent_details.sh
+         echo runner | sudo -S chmod +777 /home/runner/scripts/.env
+         echo runner | sudo cp /home/runner/scripts/.env /home/runner/scripts/.env_copy
          ./get_pr_agent_details.sh
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
