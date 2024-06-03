@@ -30,6 +30,13 @@ jobs:
           GITHUB_ACTION.AUTO_REVIEW: true
           GITHUB_ACTION.AUTO_DESCRIBE: true
           GITHUB_ACTION.UPDATE_TITLE: false
+
+          USE_CUSTOM_MODEL: true
+          CUSTOM_PROD_API_BASE: ${{ secrets.CUSTOM_PROD_API_BASE }}
+          CUSTOM_PROD_API_KEY: ${{ secrets.CUSTOM_PROD_API_KEY }}
+          GPT4128K_DEPLOY_NAME: ${{ secrets.GPT4128K_DEPLOY_NAME }}
+          CUSTOM_API_VERSION: ${{ secrets.CUSTOM_API_VERSION }}
+          # CUSTOM_PUSH_TOKEN: ${{ secrets.CUSTOM_PUSH_TOKEN }}
           
           # Uncomment the line below to enable the pre-merge checks (Ensure to provide the keywords to Code Review Dev Team to include in pre-merge checks)
           # GITHUB_ACTION.ENABLE_PRE_MERGE_CHECKS: true
