@@ -38,8 +38,8 @@ jobs:
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       TASK_TYPE: generate
-      INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/source/ubuntu_source_manager.py
-      TESTS_OUTPUT_PATH: inbm/genai_unit_tests
+      INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/sota/snapshot.py
+      # TESTS_OUTPUT_PATH: inbm/genai_unit_tests
       # EXCLUDE_PATHS: <Exclude your paths here if want to exclude specific files/dirs>
 
   UNIT-TEST-RUN:
@@ -56,6 +56,6 @@ jobs:
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       TASK_TYPE: run
-      INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/source/ubuntu_source_manager.py
-      TESTS_OUTPUT_PATH: inbm/genai_unit_tests
+      INCLUDE_PATHS: inbm/dispatcher-agent/dispatcher/sota/snapshot.py
+      # TESTS_OUTPUT_PATH: inbm/genai_unit_tests
       # EXCLUDE_PATHS: <Exclude your paths here if want to exclude specific files/dirs>
